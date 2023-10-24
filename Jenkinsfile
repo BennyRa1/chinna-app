@@ -14,7 +14,7 @@ pipeline{
 	stages{
         stage("Git Checkout"){
             steps{
-                git url:'https://github.com/bcreddydevops/chinna-app.git',branch:'main'
+                git url:'https://github.com/BennyRa1/chinna-app.git',branch:'main'
 
             }
         }
@@ -33,7 +33,7 @@ pipeline{
 		stage('Deploy to Nexus') {
             steps {
                 // Deploy the Maven artifact to the Nexus repository
-                sh 'mvn deploy -DaltDeploymentRepository=chinna-app::default::http://52.91.146.103:8081/repository/chinna-app/'
+                sh 'mvn deploy -DaltDeploymentRepository=chinna-app::default::http://54.146.76.166:8081/repository/chinna-app/'
             }
         }
 		stage('Deploy to Tomcat') {
