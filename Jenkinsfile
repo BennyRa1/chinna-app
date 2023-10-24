@@ -1,13 +1,20 @@
 pipeline{
     agent any
-      
+	
+	environment {
+        // Define environment variables
+        TOMCAT_SERVER = '54.174.95.56'
+        TOMCAT_USER = 'ubuntu'
+        TOMCAT_KEY_CREDENTIAL_ID = 'tomcat-credential'
+    }
+	
     tools{
         maven 'maven3.5'
     }
 	stages{
         stage("Git Checkout"){
             steps{
-                git url:'https://github.com/BennyRa1/chinna-app.git',branch:'main'
+                git url:'https://github.com/bcreddydevops/chinna-app.git',branch:'main'
 
             }
         }
@@ -26,21 +33,17 @@ pipeline{
 		stage('Deploy to Nexus') {
             steps {
                 // Deploy the Maven artifact to the Nexus repository
-                sh 'mvn deploy -DaltDeploymentRepository=chinna-app::default::http://54.146.76.166:8081//repository/chinna-app/'
+                sh 'mvn deploy -DaltDeploymentRepository=chinna-app::default::http://52.91.146.103:8081/repository/chinna-app/'
             }
         }
-      
-        stage('Deploy war file to Tomact'){
-            steps{
-                sshagent(['tomcat-credentials']) {
-                    sh """
-                    scp -o StrictHostKeyChecking=no target/*.war ubuntu@54.174.95.56:/opt/tomcat-9/webapps
-                    scp -o StrictHostKeyChecking=no ubuntu@52.203.145.155:/opt/tomcat-9/bin/shutdown.sh
-                    scp -o StrictHostKeyChecking=no ubuntu@52.203.145.155:/opt/tomcat-9/bin/startup.sh
-					"""
+		stage('Deploy to Tomcat') {
+            steps {
+                script {
+                    // Deploy to Tomcat
+                    sshagent(credentials: [TOMCAT_KEY_CREDENTIAL_ID]) {
+                        sh "scp target/your-web-app.war ${TOMCAT_USER}@${TOMCAT_SERVER}:/opt/tomcat-9/webapps/"
+                    }
                 }
             }
         }
-		
-	}
 }	
