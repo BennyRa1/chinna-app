@@ -4,7 +4,7 @@ pipeline{
         // Define environment variables
         TOMCAT_SERVER = '54.174.95.56'
         TOMCAT_USER = 'ubuntu'
-        TOMCAT_KEY_CREDENTIAL_ID = 'tomcat-demo'
+        TOMCAT_KEY_CREDENTIAL_ID = 'tomcat-credential'
     }
     tools{
         maven 'maven3.5'
