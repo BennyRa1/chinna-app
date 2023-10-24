@@ -2,7 +2,7 @@ pipeline{
     agent any
       environment {
         // Define environment variables
-        TOMCAT_SERVER = '52.203.145.155'
+        TOMCAT_SERVER = '54.174.95.56'
         TOMCAT_USER = 'ubuntu'
         TOMCAT_KEY_CREDENTIAL_ID = 'tomcat-credentials'
     }
@@ -31,7 +31,7 @@ pipeline{
 		stage('Deploy to Nexus') {
             steps {
                 // Deploy the Maven artifact to the Nexus repository
-                sh 'mvn deploy -DaltDeploymentRepository=chinna-app::default::http://52.91.146.103:8081/repository/chinna-app/'
+                sh 'mvn deploy -DaltDeploymentRepository=chinna-app::default::http://54.146.76.166:8081//repository/chinna-app/'
             }
         }
       
