@@ -5,7 +5,7 @@ pipeline{
         // Define environment variables
         TOMCAT_SERVER = '100.25.221.73'
         TOMCAT_USER = 'ubuntu'
-        TOMCAT_KEY_CREDENTIAL_ID = 'demo-tom'
+        TOMCAT_KEY_CREDENTIAL_ID = 'new-tomcat'
     }
 	
     tools{
