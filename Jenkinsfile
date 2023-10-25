@@ -33,7 +33,7 @@ pipeline{
             steps {
                 script {
                     // Deploy to Tomcat
-                  sh  "scp -i /home/ec2-user/aws.pem /var/lib/jenkins/workspace/tomcat/target/hiring.war ubuntu@100.25.221.73:/home/ubuntu/"
+                  sh  "scp -i /var/aws.pem /var/lib/jenkins/workspace/tomcat/target/hiring.war ubuntu@100.25.221.73:/home/ubuntu/"
                 }
             }
         }
