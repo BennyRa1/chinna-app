@@ -1,11 +1,6 @@
 pipeline{
     agent any
-	
-	environment {
-        // Define environment variables
-        TOMCAT_SERVER = '100.25.221.73'
-        TOMCAT_USER = 'root'
-        TOMCAT_KEY_CREDENTIAL_ID = 'new-tomcat'
+
     }
 	
     tools{
@@ -40,9 +35,7 @@ pipeline{
             steps {
                 script {
                     // Deploy to Tomcat
-                    sshagent(credentials: [TOMCAT_KEY_CREDENTIAL_ID]) {
-                        sh "scp target/your-web-app.war ${TOMCAT_USER}@${TOMCAT_SERVER}:/opt/tomcat-9/webapps/"
-                    }
+                    scp -i /home/ec2-user/aws.pem /var/lib/jenkins/workspace/tomcat/target/hiring.war ubuntu@100.25.221.73:/home/ubuntu
                 }
             }
         }
